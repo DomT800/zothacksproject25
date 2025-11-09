@@ -17,10 +17,10 @@ const GoogleSearchBar = () => {
 
   const handleSearch = useCallback(
     debounce(async (term) => {
-      // if (!term.trim()) {
-      //   setSearchResults([])
-      //   return
-      // }
+      if (!term.trim()) {
+        setSearchResults([]);
+        return;
+      }
 
       try {
         console.log(term)
@@ -36,24 +36,20 @@ const GoogleSearchBar = () => {
       }
     }, 300),
     []
-  )
- 
+  );
 
-  const handleInputChange = (e) => { setSearchTerm(e.target.value) }
+  useEffect(() => {
+    handleSearch(searchTerm);
+  }, [searchTerm, handleSearch]);
 
-
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
 
   return (
-
-    <div className="flex min-h-screen flex-col items-center bg-white p-4">
-        <form
-    onSubmit={(e) => {
-    e.preventDefault()
-    handleSearch(searchTerm)
-  }}
-  className="mb-8 w-full max-w-2xl"
-  >
-        <div className="relative">
+    <div className="google-search-container">
+      <form onSubmit={(e) => e.preventDefault()} className="search-form">
+        <div className="input-wrapper">
           <input
             type="text"
             value={searchTerm}
