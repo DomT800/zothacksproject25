@@ -4,7 +4,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 
 def webscrape(search):
-    links =[]
+    links = []
+
     search_url = "https://www.change.org/search?q="+search
     #print(search_url)
     driver = webdriver.Chrome()
