@@ -1,6 +1,5 @@
-{
-	box-sizing: border-box;
-	margin: 0px;
-	padding: 1px;
-	font-family: Arial, Helvetica, serif;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root { height: 100%; }

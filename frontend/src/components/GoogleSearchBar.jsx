@@ -3,17 +3,22 @@ import { Search } from 'lucide-react'
 
 
 
+
+
+
 const GoogleSearchBar = () => {
-    const [searchTerm, setSearchTerm] = useState('')
-    const [searchResults, setSearchResults] = useState([])
- 
-    const debounce = (func, delay) => {
-        let timeoutId
-        return (...args) => {
-            clearTimeout(timeoutId)
-        timeoutId = setTimeout(() => func(...args), delay)
-        }
-    }
+  const [searchTerm, setSearchTerm] = useState('')
+  const [searchResults, setSearchResults] = useState([])
+
+
+  const debounce = (func, delay) => {
+      let timeoutId
+      return (...args) => {
+          clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => func(...args), delay)
+      }
+  }
+
 
   const handleSearch = useCallback(
     debounce(async (term) => {
@@ -22,20 +27,25 @@ const GoogleSearchBar = () => {
       //   return
       // }
 
+
       try {
         console.log(term)
-        const response = await fetch(`/api/issues?user_input=${encodeURIComponent(term)}&num_of_articles=5`)
+        const response = await fetch(`api/actions?user_input=${encodeURIComponent(term)}`)
         const data = await response.json()
         console.log(data)
       } catch (error) {
         console.error('Search failed:', error)
       }
+
+
     }, 300),
     []
   )
  
 
   const handleInputChange = (e) => { setSearchTerm(e.target.value) }
+
+
 
 
 
@@ -87,7 +97,8 @@ const GoogleSearchBar = () => {
         </div>
       )}{' '}
     </div>
-  ) 
+  )
 }
  
 export default GoogleSearchBar
+
