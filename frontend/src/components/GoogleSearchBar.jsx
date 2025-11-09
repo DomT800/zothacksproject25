@@ -24,9 +24,13 @@ const GoogleSearchBar = () => {
 
       try {
         console.log(term)
-        const response = await fetch(`/api/issues?user_input=${encodeURIComponent(term)}&num_of_articles=5`)
-        const data = await response.json()
-        console.log(data)
+        const i = await fetch(`/api/issues?user_input=${encodeURIComponent(term)}&num_of_articles=5`)
+        const a = await fetch(`api/actions?user_input=${encodeURIComponent(term)}`)
+        const issues = await i.json()
+        const actions = await a.json()
+        navigate('/results', {state: {issues}})
+        console.log(issues)
+        console.log(actions)
       } catch (error) {
         console.error('Search failed:', error)
       }
