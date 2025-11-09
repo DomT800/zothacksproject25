@@ -16,17 +16,10 @@ const GoogleSearchBar = () => {
 
   const handleSearch = useCallback(
     debounce(async (term) => {
-<<<<<<< HEAD
       if (!term.trim()) {
         setSearchResults([]);
         return;
       }
-=======
-      // if (!term.trim()) {
-      //   setSearchResults([])
-      //   return
-      // }
->>>>>>> 4119ad332a19238760b7152365daade5ff292b28
 
       try {
         console.log(term);
@@ -41,7 +34,6 @@ const GoogleSearchBar = () => {
       }
     }, 300),
     []
-<<<<<<< HEAD
   );
 
   useEffect(() => {
@@ -56,28 +48,6 @@ const GoogleSearchBar = () => {
     <div className="google-search-container">
       <form onSubmit={(e) => e.preventDefault()} className="search-form">
         <div className="input-wrapper">
-=======
-  )
- 
-
-  const handleInputChange = (e) => { setSearchTerm(e.target.value) }
-
-
-
-
-
-  return (
-
-    <div className="flex min-h-screen flex-col items-center bg-white p-4">
-        <form
-    onSubmit={(e) => {
-    e.preventDefault()
-    handleSearch(searchTerm)
-  }}
-  className="mb-8 w-full max-w-2xl"
-  >
-        <div className="relative">
->>>>>>> 4119ad332a19238760b7152365daade5ff292b28
           <input
             type="text"
             value={searchTerm}
