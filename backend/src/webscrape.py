@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
-
+import urllib.parse
 
 def webscrape(search):
     links =[]
@@ -29,5 +29,6 @@ def webscrape(search):
         title = petition_html.find("h1", class_ =["petition-title","corgi-8pem40"]).text
         img = "https:"+ petition_html.find('img',class_="corgi-ife7d0").get('src')
        
-        json_body.append({"title": title, "image": img, "url": full_url})
+        json_body.append({"title": urllib.parse.quote(title), "image": img, "url": full_url})
     return json_body
+

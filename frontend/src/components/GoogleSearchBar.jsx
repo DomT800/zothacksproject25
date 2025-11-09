@@ -1,18 +1,19 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { Search } from "lucide-react";
-import "./GoogleSearchBar.css";
+import React, {useState, useCallback, useEffect} from 'react'
+import { Search } from 'lucide-react'
+
+
 
 const GoogleSearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  const debounce = (func, delay) => {
-    let timeoutId;
-    return (...args) => {
-      clearTimeout(timeoutId);
-      timeoutId = setTimeout(() => func(...args), delay);
-    };
-  };
+    const [searchTerm, setSearchTerm] = useState('')
+    const [searchResults, setSearchResults] = useState([])
+ 
+    const debounce = (func, delay) => {
+        let timeoutId
+        return (...args) => {
+            clearTimeout(timeoutId)
+        timeoutId = setTimeout(() => func(...args), delay)
+        }
+    }
 
   const handleSearch = useCallback(
     debounce(async (term) => {
@@ -22,15 +23,16 @@ const GoogleSearchBar = () => {
       }
 
       try {
-        console.log(term);
-        const response = await fetch(
-          `api/actions?user_input=${encodeURIComponent(term)}`
-        );
-        const data = await response.json();
-        console.log(data);
-        setSearchResults(data.results || []);
+        console.log(term)
+        const i = await fetch(`/api/issues?user_input=${encodeURIComponent(term)}&num_of_articles=5`)
+        const a = await fetch(`api/actions?user_input=${encodeURIComponent(term)}`)
+        const issues = await i.json()
+        const actions = await a.json()
+        navigate('/results', {state: {issues}})
+        console.log(issues)
+        console.log(actions)
       } catch (error) {
-        console.error("Search failed:", error);
+        console.error('Search failed:', error)
       }
     }, 300),
     []
@@ -52,35 +54,40 @@ const GoogleSearchBar = () => {
             type="text"
             value={searchTerm}
             onChange={handleInputChange}
-            className="search-input"
-            placeholder="Search for issues that matter to you"
+            className="w-full rounded-full border border-gray-200 bg-white px-5 py-3 pr-20 text-base shadow-md transition-shadow duration-200 hover:shadow-lg focus:border-gray-300 focus:outline-none"
+            placeholder="Search Google or type a URL"
           />
-          <button type="submit" className="search-button">
-            <Search size={20} />
-          </button>
-        </div>
-      </form>
-
+          <div className="absolute right-0 top-0 mr-4 mt-3 flex items-center">
+           
+            <button type="submit" className="text-blue-500 hover:text-blue-600">
+              <Search size={20} />{' '}
+            </button>{' '}
+          </div>{' '}
+        </div>{' '}
+      </form>{' '}
       {searchResults.length > 0 && (
-        <div className="search-results">
-          <h2>Search Results:</h2>
+        <div className="w-full max-w-2xl rounded-lg bg-white p-4 shadow-md">
+          <h2 className="mb-4 text-xl font-bold"> Search Results: </h2>{' '}
           <ul>
+            {' '}
             {searchResults.map((result) => (
-              <li key={result.id}>
+              <li key={result.id} className="mb-2">
                 <a
                   href={result.url}
+                  className="text-blue-600 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {result.title}
-                </a>
+                  {' '}
+                  {result.title}{' '}
+                </a>{' '}
               </li>
-            ))}
-          </ul>
+            ))}{' '}
+          </ul>{' '}
         </div>
-      )}
+      )}{' '}
     </div>
-  );
-};
-
-export default GoogleSearchBar;
+  ) 
+}
+ 
+export default GoogleSearchBar
