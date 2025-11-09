@@ -27,5 +27,3 @@ def parse_gpt_output(chat_input: str, num_of_articles: int):
         articles_list.pop(0)
         articles_list.pop(0)
     return output_dict
-
-"What is happening with government shutdowns in the U.S.?"
