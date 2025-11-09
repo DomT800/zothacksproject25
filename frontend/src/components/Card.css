@@ -1,38 +1,75 @@
 .card-container {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-	background-color: #ffffff; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
- 
-.card{
-    border: 1px solid hsl(0, 0%, 80%);
-    border-radius: 10px;
-    box-shadow: 5px 5px 5px hsla(242, 100%, 50%, 0.1);
-    padding: 20px;
-    margin: 10px;   
-    text-align: center;
-    max-width: 400px;
-    display: inline-block;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid hsl(0, 0%, 80%);
+  border-radius: 12px;
+  box-shadow: 5px 5px 12px hsla(242, 100%, 50%, 0.1);
+  padding: 0;
+  margin: 20px;
+  max-width: 350px;
+  height: 500px;
+  overflow: hidden;
+  text-align: center;
+  background-color: #fff;
+  position: relative;
 }
-.card .card-img{
-    max-width: 60%;
-    height: 40%;
-    border-radius: 50%;
-    margin-bottom: 10px;
-    margin-right: 20px;
+
+.card-img {
+  width: 100%;
+  height: 50%; /* Top half of the card */
+  object-fit: cover;
 }
-.card .card-title{
-    font-family: Arial, sans-serif;
-    margin: 0;
-    color: hsl(0, 0%, 20%);
+
+.card-stuff {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
-.card .card-text{
-    font-family: Arial, sans-serif;
-    color: hsl(0, 0%, 30%);
+
+.card-title {
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  margin: 0 0 0.5rem;
+  color: hsl(0, 0%, 20%);
+}
+
+.card-text {
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
+  color: hsl(0, 0%, 30%);
+  margin-bottom: 1rem;
+}
+
+.card-btn {
+  display: inline-block;
+  margin-top: auto;
+  padding: 8px 16px;
+  background-color: #2563eb;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.card-btn:hover {
+  background-color: #1e4db7;
+}
+
+/* Position icon at bottom center */
+.card svg {
+  margin-top: auto;
+  margin-bottom: 16px;
+  align-self: center;
+  color: #444;
 }
