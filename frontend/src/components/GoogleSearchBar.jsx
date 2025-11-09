@@ -1,45 +1,62 @@
-import React, {useState, useCallback, useEffect} from 'react'
-import { Search } from 'lucide-react'
-
-
-
-
-
+import React, { useState, useCallback, useEffect } from "react";
+import { Search } from "lucide-react";
+import "./GoogleSearchBar.css";
 
 const GoogleSearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('')
-  const [searchResults, setSearchResults] = useState([])
-
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   const debounce = (func, delay) => {
-      let timeoutId
-      return (...args) => {
-          clearTimeout(timeoutId)
-      timeoutId = setTimeout(() => func(...args), delay)
-      }
-  }
-
+    let timeoutId;
+    return (...args) => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => func(...args), delay);
+    };
+  };
 
   const handleSearch = useCallback(
     debounce(async (term) => {
+<<<<<<< HEAD
+      if (!term.trim()) {
+        setSearchResults([]);
+        return;
+      }
+=======
       // if (!term.trim()) {
       //   setSearchResults([])
       //   return
       // }
-
+>>>>>>> 4119ad332a19238760b7152365daade5ff292b28
 
       try {
-        console.log(term)
-        const response = await fetch(`api/actions?user_input=${encodeURIComponent(term)}`)
-        const data = await response.json()
-        console.log(data)
+        console.log(term);
+        const response = await fetch(
+          `api/actions?user_input=${encodeURIComponent(term)}`
+        );
+        const data = await response.json();
+        console.log(data);
+        setSearchResults(data.results || []);
       } catch (error) {
-        console.error('Search failed:', error)
+        console.error("Search failed:", error);
       }
-
-
     }, 300),
     []
+<<<<<<< HEAD
+  );
+
+  useEffect(() => {
+    handleSearch(searchTerm);
+  }, [searchTerm, handleSearch]);
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  return (
+    <div className="google-search-container">
+      <form onSubmit={(e) => e.preventDefault()} className="search-form">
+        <div className="input-wrapper">
+=======
   )
  
 
@@ -60,45 +77,40 @@ const GoogleSearchBar = () => {
   className="mb-8 w-full max-w-2xl"
   >
         <div className="relative">
+>>>>>>> 4119ad332a19238760b7152365daade5ff292b28
           <input
             type="text"
             value={searchTerm}
             onChange={handleInputChange}
-            className="w-full rounded-full border border-gray-200 bg-white px-5 py-3 pr-20 text-base shadow-md transition-shadow duration-200 hover:shadow-lg focus:border-gray-300 focus:outline-none"
-            placeholder="Search Google or type a URL"
+            className="search-input"
+            placeholder="Search for issues that matter to you"
           />
-          <div className="absolute right-0 top-0 mr-4 mt-3 flex items-center">
-           
-            <button type="submit" className="text-blue-500 hover:text-blue-600">
-              <Search size={20} />{' '}
-            </button>{' '}
-          </div>{' '}
-        </div>{' '}
-      </form>{' '}
+          <button type="submit" className="search-button">
+            <Search size={20} />
+          </button>
+        </div>
+      </form>
+
       {searchResults.length > 0 && (
-        <div className="w-full max-w-2xl rounded-lg bg-white p-4 shadow-md">
-          <h2 className="mb-4 text-xl font-bold"> Search Results: </h2>{' '}
+        <div className="search-results">
+          <h2>Search Results:</h2>
           <ul>
-            {' '}
             {searchResults.map((result) => (
-              <li key={result.id} className="mb-2">
+              <li key={result.id}>
                 <a
                   href={result.url}
-                  className="text-blue-600 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {' '}
-                  {result.title}{' '}
-                </a>{' '}
+                  {result.title}
+                </a>
               </li>
-            ))}{' '}
-          </ul>{' '}
+            ))}
+          </ul>
         </div>
-      )}{' '}
+      )}
     </div>
-  )
-}
- 
-export default GoogleSearchBar
+  );
+};
 
+export default GoogleSearchBar;

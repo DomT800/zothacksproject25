@@ -1,5 +1,6 @@
 // Bookmark.jsx
 import React, { useState, useEffect, useRef } from "react";
+import "./Bookmark.css";
 
 const STORAGE_KEY = "my_bookmarks_v1";
 

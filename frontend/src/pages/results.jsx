@@ -1,36 +1,44 @@
-import Card from "@/components/Card";
-
 import React, { useState } from "react";
+import Card from "@/components/Card";
 import ModalV2 from "@/components/ModalV2";
+import "./Results.css";
 
 const Results = () => {
-      const [isOpen, setIsOpen] = useState(false);
-    return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-50">
-      <div className="w-full max-w-2xl px-4">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-semibold">Topics</h1>
-          <p className="text-sm text-gray-600">Topics listed below</p>
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="results-container">
+      <div className="results-header">
+        <p>Showing results for: </p>
+      </div>
+
+      <main className="card-grid">
+        {/* You can duplicate or map these to simulate more cards */}
+        <div className="card-wrapper">
+          <button className="card-button" onClick={() => setIsOpen(true)}>
+            <Card />
+          </button>
         </div>
+        <div className="card-wrapper">
+          <Card />
+        </div>
+        <div className="card-wrapper">
+          <Card />
+        </div>
+        <div className="card-wrapper">
+          <Card />
+        </div>
+        <div className="card-wrapper">
+          <Card />
+        </div>
+        <div className="card-wrapper">
+          <Card />
+        </div>
+      </main>
 
-
-    <main>
-      <button onClick={() => setIsOpen(true)}>
-        <Card/>
-        View Article
-      </button>
       {isOpen && <ModalV2 setIsOpen={setIsOpen} />}
-    </main>
-          </div>
     </div>
   );
 };
-<>
-<div>
-    <Card /> 
-
-</div>
-</>
-
 
 export default Results;
