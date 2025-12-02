@@ -5,7 +5,8 @@ from selenium.webdriver.chrome.service import Service
 import urllib.parse
 
 def webscrape(search):
-    links =[]
+    links = []
+
     search_url = "https://www.change.org/search?q="+search
     #print(search_url)
     driver = webdriver.Chrome()
